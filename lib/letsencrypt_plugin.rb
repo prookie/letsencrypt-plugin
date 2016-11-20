@@ -39,7 +39,7 @@ module LetsencryptPlugin
     end
 
     def client
-      @client ||= Acme::Client.new(private_key: load_private_key, endpoint: @options[:endpoint])
+      @client ||= Acme::Client.new(private_key: load_private_key, endpoint: @options[:endpoint], connection_options: {ssl: { verify: false }})
     rescue Exception => e
       Rails.logger.error(e.to_s)
       raise e
